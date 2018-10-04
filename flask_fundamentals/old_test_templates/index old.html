@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <h3>My flask template with embedded Python-like code</h3>
+        <!-- this will output the value of our phrase variable -->
+        <p>Phrase: {{ phrase }}</p>
+        <!-- this will output the value of our times variable -->
+        <p>Times: {{ times }}</p>
+        <!-- here is an example of embedding a for-loop in our code -->
+        {% for x in range(0,times): %}
+        <p>{{ phrase }}</p>
+        {% endfor %}
+        <!-- here is an example of embedding an if statement in our code -->
+        {% if phrase == "hello" %}
+        <p>The phrase says hello</p>
+        {% endif %}
+        <h1>Random Numbers</h1>
+        {% for number in random_numbers %}
+            <p>{{ number }}</p>
+        {% endfor %}
+        <h1>Students</h1>
+        {% for student in students %}
+            <p>{{ student['name'] }} - {{ student['age'] }}</p>
+        {% endfor %}
+</body>
+</html>
