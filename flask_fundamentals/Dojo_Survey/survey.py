@@ -1,15 +1,22 @@
-from flask import Flask, render_template
-app = Flask(__name__)
+from flask import Flask, render_template, request, redirect
+app = Flask(__name__) 
 @app.route('/')
 def index():
-    users = (
-        {'first_name' : 'Michael', 'last_name' : 'Choi'},
-        {'first_name' : 'John', 'last_name' : 'Supsupin'},
-        {'first_name' : 'Mark', 'last_name' : 'Guillen'},
-        {'first_name' : 'KB', 'last_name' : 'Tonel'}
-    );
+    return render_template("index.html")
+@app.route('/result', methods=['POST'])
+def create_user():
+    print("Info Submitted")
+    name = request.form['name']
+    dojo = request.form['dojo']
+    favorite = request.form['favorite']
+    comments = request.form['comments']
+    return render_template('success.html')
+@app.route('/danger')
+def danger():
+    print("a user tried to visit /danger.  we have redirected the user to /")
+    return redirect('/')
 
-    return render_template("index.html", users=users)
 
-if __name__=="__main__":
+
+if __name__=='__main__':
     app.run(debug=True)
