@@ -1,0 +1,24 @@
+Error: File "/Users/christophertruax/Desktop/Coding Dojo/python_stack/flask_MySQL/flask_mysql/mysqlconnection.py", line 5
+    def __init__(self, db):
+      ^
+IndentationError: expected an indented block
+
+FIX: Indent the 'def' correctly.
+
+Error: pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+
+FIX: Wrong password provided, change to correct one.
+
+Error: File "/Users/christophertruax/Desktop/Coding Dojo/python_stack/flask_MySQL/flask_mysql/mysqlconnection.py", line 46, in connectToMySQL
+    return MySQLConnection(db)
+NameError: name 'MySQLConnection' is not defined
+
+FIX: Mistyped the name of my class so couldn't create an instance of an undefined class. Make sure class' name and when creating an instance from that class match.
+
+Error: Traceback (most recent call last):
+  File "server.py", line 9, in <module>
+    print("all the users", mysql.query_db("SELECT * FROM users;"))
+TypeError: query_db() missing 1 required positional argument: 'data'
+
+FIX: I deleted the default value for the positional argument - "data", so it became a required argument that I had not provided. Had to add a default value for "data" of None so that it doesn't make it a required positional statement, instead if not provided it sets it to None.
+

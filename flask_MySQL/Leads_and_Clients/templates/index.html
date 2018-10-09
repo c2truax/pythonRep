@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leads and Clients</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+        <form action='/date_range' method='POST'>
+            <div class="form-group row">
+            
+                <label for="bdate" class="col-lg-1 col-form-label">Date From</label>
+                <div class="col-lg-2">
+                    <input class="form-control" type="date" name='datefrom' value="mm/dd/yyyy" id="example-date-input">
+                </div>
+                <label for="bdate" class="col-lg-1 col-form-label">Date To</label>
+                <div class="col-lg-2">
+                    <input class="form-control" type="date" name='dateto' value="mm/dd/yyyy" id="example-date-input">
+                </div>
+                <button type="submit" value="submit" class="btn btn-dark">Update</button>
+            </div>
+        </form>
+        <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Number of Leads</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lead in all_leads %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{lead['name']}}</td>
+                        <td>{{lead['TOTAL']}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+<script>
+        window.onload = function () {
+        
+            var options = {
+                title: {
+                    text: "Customers and number of new leads"
+                },
+                subtitles: [{
+                    text: "{{session['daterange']}}"
+                }],
+                animationEnabled: true,
+                data: [{
+                    type: "pie",
+                    startAngle: 40,
+                    toolTipContent: "<b>{label}</b>: {y}%",
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabelFontSize: 16,
+                    indexLabel: "{label} - {y}%",
+                    dataPoints: [
+                    {% for lead in all_leads %}
+                        { y: {{lead['TOTAL']}}, label: "{{lead['name']}}" },
+                    {%endfor%}    
+                    ]
+                }]
+            };
+            $("#chartContainer").CanvasJSChart(options);
+        
+        }
+        </script>
+</html>
