@@ -158,7 +158,7 @@ def admin():
         return redirect('/danger')
     else:
         mysql = connectToMySQL('walldb')
-        query = 'SELECT * FROM user;'
+        query = 'SELECT * FROM user WHERE user_level = 1 OR user_level =9;'
         adminpage = mysql.query_db(query)
         session['adminpage'] = adminpage
         return render_template('admin.html')
@@ -204,6 +204,26 @@ def deleteMessage():
     session.pop('sents')
     session.pop('receivecount')
     return redirect('/success')
+
+@app.route('/deluser', methods=['POST'])
+def deleteUser():
+    mysql = connectToMySQL('walldb')
+    query = 'SELECT id FROM user WHERE id = %(mid)s;'
+    data = { 'mid' : request.form['iduser'] }
+    idmatch = mysql.query_db(query, data)
+    if int(session['userid']) != int(idmatch[0]['id']):
+        if 'warn' not in session:
+            session['warn'] = True      
+            return redirect('/danger')
+        else:
+            return redirect('/logout')
+
+    # mysql = connectToMySQL('walldb')
+    # query = ';'
+    # data = { 'id' : request.form['id'] }
+    # mysql.query_db(query, data)
+    return redirect('/admin')
+
 
 @app.route('/logout')
 def logout():

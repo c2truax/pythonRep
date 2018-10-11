@@ -44,10 +44,10 @@
                         <td>{{user['email']}}</td>
                         <td>{{user['user_level']}}</td>
                         <td>
-                                <form action='/deleteuser' class='' method='POST'>
-                                    <input type="hidden" name="userid" value="{{user['id']}}">
-                                    <button type="submit" value="submit" class="d-inline-block btn btn-danger align-top">DELETE</button>
-                                </form>
+                            <form action='/deluser' class='' method='POST'>
+                                <input type="hidden" name="iduser" value="{{session['userid']}}">
+                                <button type="submit" value="submit" class="d-inline-block btn btn-danger align-top">DELETE</button>
+                            </form>
                         </td>
                       </tr>
                     {% endfor %}
