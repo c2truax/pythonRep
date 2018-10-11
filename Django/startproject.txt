@@ -1,0 +1,38 @@
+django-admin startproject main
+
+rename parent main to name of project
+
+cd {name of project}
+
+mkdir apps
+
+cd apps
+
+touch __init__.py
+
+python ../manage.py startapp {name of app}
+
+edit settings.py inside the INSTALLED_APPS section add 'apps.{name of app}'
+
+edit urls.py in your main folder to import 'include' and point the urlpatterns to url(r'^', include('apps.first_app.urls'))
+
+cd apps/{name of app}
+touch urls.py
+
+edit the recently created urls.py and add {
+    from django.conf.urls import url
+    from . import views
+    urlpatterns = [
+        url(r'^$', views.index)
+    ]
+}
+
+
+
+
+
+
+
+
+go to where manage.py is and type the following to run your server...
+python manage.py runserver
