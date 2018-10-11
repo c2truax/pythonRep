@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wall</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+</head>
+<body>
+    <div class="container col-3">
+        <h1 class="text-danger">DANGER</h1>
+        <p>Hmm... Message {{session['messid']}} doesn't belong to you. Are you trying to hack my site???</p>
+        <p>Your ip address {{ipaddress}} has been recorded.</p>
+        <p>Next time you attempt an activity like this we will log you off automatically and report your ip address to our site administrator.</p>
+        <a href="/success" class="btn btn-danger">RETURN</a>
+    </div>
+
+</body>
+</html>

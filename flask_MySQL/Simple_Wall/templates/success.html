@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wall</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class='text-success'>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class='container border border-dark bg-primary text-white'>
+        <h1 class='col-lg-5 d-inline-block'>CodingDojo Wall</h1>
+        <h2 class='col-lg-5 d-inline-block'>Welcome {{ session['name'] }}</h2>
+        <a class='col-lg-1 d-inline-block text-white' href="/logout">Logout</a>
+    </div>
+    <div class='container'>
+        <div class='col-lg-5 d-inline-block align-top'>
+            <h3 class="mb-5">You have {{ session['receivecount'] }} messages, {{ session['name'] }}</h3>
+            {% with sents = session['sents'] %}
+                {% if sents %}
+                    {% for sent in sents %}
+                    <form action='/delete' class='mb-3' method='POST'>
+                        <h5>{{sent['name']}} said at {{sent['sent_at']}}</h5>
+                        <p class='d-inline-block'>"{{sent['message']}}"</p>
+                        <input type="hidden" name="deleteid" value="{{sent['mid']}}">
+                        <button type="submit" value="submit" class="d-inline-block btn-danger align-top"><img style="width:30px" src="{{ url_for('static', filename='images/trash.png') }}"></button>
+                    </form>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class='col-lg-6 d-inline-block align-top'>
+            <h3>Send a message</h3>
+            <p>You have sent {{ session['sendcount'] }} messages so far.</p>
+            {% with recipients = session['recipients'] %}
+                {% if recipients %}
+                    {% for recipient in recipients %}
+                    <form action='/sendmessage' class='mb-3' method='POST'>
+                        <h5 class='d-inline-block col-lg-3 align-top'>{{recipient['first_name']}}</h5>
+                        <textarea class="form-control d-inline-block col-lg-6 align-top" name="message" rows="2"></textarea>
+                        <input type="hidden" name="recipientid" value="{{recipient['id']}}">
+                        <button type="submit" value="submit" class="col-lg-2 d-inline-block btn btn-dark align-top">Send</button>
+                    </form>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+        </div>
+    </div>
+
+</body>
+</html>
