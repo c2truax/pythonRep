@@ -12,22 +12,22 @@ touch __init__.py
 
 python ../manage.py startapp {name of app}
 
-edit settings.py inside the INSTALLED_APPS section add 'apps.{name of app}'
+edit settings.py inside the INSTALLED_APPS section add 'apps.{name of app}',
 
-edit urls.py in your main folder to import 'include' 
+edit urls.py in your main folder append to import 'include' 
 and point the urlpatterns to {
-    url(r'^', include('apps.first_app.urls'))
+    url(r'^', include('apps.{name of app}.urls')),
 }
 
 cd apps/{name of app}
 touch urls.py
 
 edit the recently created urls.py and add {
-    from django.conf.urls import url
-    from . import views
-    urlpatterns = [
-        url(r'^$', views.index)
-    ]
+from django.conf.urls import url
+from . import views
+urlpatterns = [
+    url(r'^$', views.index)
+]
 }
 
 also edit the views.py to be{
@@ -39,6 +39,10 @@ def index(request):
     return HttpResponse(response)
 
 }
+
+# Need to be in same directory as manage.py file
+  > python manage.py makemigrations
+  > python manage.py migrate
 
 go to where manage.py is and type the following to run your server...
 python manage.py runserver

@@ -1,0 +1,53 @@
+Please do the following
+
+1. Create a new model called 'User' with the information above.
+from __future__ import unicode_literals
+from django.db import models
+
+class User(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email_address = models.EmailField(max_length=255)
+    age = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+2. Successfully create and run the migration files
+python manage.py makemigrations
+python manage.py migrate
+
+Migrations for 'user_login':
+  apps/user_login/migrations/0001_initial.py:
+    - Create model User
+(djangoPy3Env) @TRUAX~/Desktop/Coding Dojo/python_stack/Django/django_ORM $ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, user_login
+Running migrations:
+  Rendering model states... DONE
+  Applying user_login.0001_initial... OK
+
+3. Using the shell...
+    1. Know how to retrieve all users.
+    User.objects.all()
+    2. Know how to get the last user.
+    User.objects.last()
+    3. Create a few records in the users
+    User.objects.create(first_name="Chris", last_name="Truax", email_address="c2truax@gmail.com", age="42") 
+    User.objects.create(first_name="Natalie", last_name="Truax", email_address="natalie@gmail.com", age="33")
+    User.objects.create(first_name="Xander", last_name="Truax", email_address="xander@gmail.com", age="2")
+    User.objects.create(first_name="Gideon", last_name="Truax", email_address="gideon@gmail.com", age="0")
+    4. Know how to get the first user.
+    User.objects.first()
+    5. Know how to get the users sorted by their first name (order by first_name DESC)
+    User.objects.all().values().order_by("-first_name")
+    6. Get the record of the user whose id is 3 and UPDATE the person's last_name to something else. Know how to do this directly in the console using .get and .save.
+    user3 = User.objects.get(id=3)
+    user3.last_name = "TheGreat"
+    user3.save()
+    7. Know how to delete a record of a user whose id is 4 (use something like User.objects.get(id=2).delete...).
+    User.objects.get(id=4).delete()
+4. (optional) Ninja:
+    1. Find a way to validate the data coming in to the shell.  For example, make sure that "name" fields are a minimum length, "email" is a valid email, or that "email" doesn't already exist in the db.
+    .unique
+    .validate_email
+    .MinLengthValidator(2)
+    Was not sure where to put these.

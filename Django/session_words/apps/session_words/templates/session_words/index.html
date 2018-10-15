@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>survey</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'survey/css/style.css' %}">
+    
+</head>
+<body class="bg-info">
+    <div class="container d-inline-block col-lg-6 p-3 text-white">
+        <form action='/process/' method='post'>
+            {% csrf_token %}
+                <div class="form-group">
+                  <label for="word">Add a new word</label>
+                  <input type="text" class="form-control" name="word">
+                </div>
+                <div class="form-check">
+                    <input type="hidden" name="radio" value="dark">
+                    <input class="form-check-input" type="radio" name="radio" id="exampleRadios1" value="red">
+                    <label class="form-check-label" for="exampleRadios1">
+                        Red
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radio" id="exampleRadios2" value="green">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Green
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radio" id="exampleRadios2" value="blue">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Blue
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                        <input type="hidden" name="big_font" value="0">
+                        <input type="checkbox" class="form-check-input" name=big_font value='1'>
+                        <label class="form-check-label" for="exampleCheck1">show in BIG fonts!</label>
+                      </div>
+                <div class="nav">
+                    <input type='submit' class="btn btn-light nav-item" value='Submit'>
+                </div>
+        </form>
+    </div>
+    <div class="container d-inline-block col-lg-5 align-top p-3 bg-light">
+        <form  action='/reset/' method="GET">
+                {% csrf_token %}
+                <div class="nav justify-content-end">
+                        <input type='submit' class="btn btn-danger nav-item" value='Clear Session'>
+                </div>
+        </form>
+        <div class="container">
+            
+                
+                    {% for word in request.session.words %}
+                    <div class="container">
+                        <p class="font-weight-{{word.big_font}} text-{{word.color}} d-inline-block">{{word.word}}</p>
+                        <p class="d-inline-block"> - added on {{word.datetime}}</p>
+                    </div>
+                    {% endfor %}
+                
+            
+        </div>
+    </div>
+</body>
+</html>
