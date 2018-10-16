@@ -1,0 +1,69 @@
+This is what you'll do:
+
+1. Start a new app (the name of the app should be 'dojo_ninjas')
+2. Create appropriate tables/models that allows you to perform tasks such as
+from __future__ import unicode_literals
+from django.db import models
+class Dojo(models.Model):
+    name = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=2)
+class Ninja(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    dojo = models.ForeignKey(Dojo, related_name = "ninjas")
+
+    1. Dojo.objects.first().ninjas.all()
+    2. Ninja.objects.first().dojo
+3. Using Django Shell:
+    1. Create 3 dojos by using Dojo.objects.create
+        Have the first dojo be "CodingDojo Silicon Valley" in "Mountain View", "CA".
+        Dojo.objects.create(name="CodingDojo Silicon Valley", city="Mountain View", state="CA")
+        Have the second dojo be "CodingDojo Seattle" in "Seattle", "WA".
+        Dojo.objects.create(name="CodingDojo Seattle", city="Seattle", state="WA")
+        Have the third dojo be "CodingDojo New York" in "New York", "NY".
+        Dojo.objects.create(name="CodingDojo New York", city="New York", state="NY")
+    2. Delete the three dojos you created (e.g. Dojo.objects.get(id=1).delete())
+        Dojo.objects.get(id=1).delete()
+        Dojo.objects.last().delete()
+        Dojo.objects.first().delete()
+    3. Create 3 additional dojos 
+        dojoCA = Dojo(name="CodingDojo Silicon Valley", city="Mountain View", state="CA")
+        dojoCA.save()
+        dojoWA = Dojo(name="CodingDojo Seattle", city="Seattle", state="WA")
+        dojoWA.save()
+        dojoNY = Dojo(name="CodingDojo New York", city="New York", state="NY")
+        dojoNY.save()
+    4. Create 3 ninjas that belong to the first dojo you created.
+        Ninja.objects.create(first_name="Pete",last_name="Dragon", dojo=Dojo.objects.get(id=4))
+        Ninja.objects.create(first_name="George",last_name="Burdell", dojo=Dojo.objects.get(id=4))
+        Ninja.objects.create(first_name="Paul",last_name="McCartney", dojo=Dojo.objects.get(id=4))
+    5. Create 3 more ninjas and have them belong to the second dojo you created.
+        Ninja.objects.create(first_name="Paul",last_name="TheApostle", dojo=Dojo.objects.get(state="WA"))
+        Ninja.objects.create(first_name="Ringo",last_name="Star", dojo=Dojo.objects.get(state="WA"))
+        Ninja.objects.create(first_name="Luke",last_name="Skywalker", dojo=Dojo.objects.get(state="WA"))
+    6. Create 3 more ninjas and have them belong to the third dojo you created.
+        Ninja.objects.create(first_name="Han",last_name="Solo", dojo=Dojo.objects.last())
+        Ninja.objects.create(first_name="JeanLuc",last_name="Picard", dojo=Dojo.objects.last())
+        Ninja.objects.create(first_name="James",last_name="Kirk", dojo=Dojo.objects.last())
+    7. Be able to retrieve all ninjas that belong to the first Dojo
+        Dojo.objects.first().ninjas.all().values()
+    8. Be able to retrieve all ninjas that belong to the last Dojo
+        Dojo.objects.last().ninjas.all().values()
+extra 9. Display the Dojo of a ninjas
+        Ninja.objects.get(first_name="Luke").dojo
+4. Add a new field in the Dojo class (found in your models.py) called 'desc'. Allow 'desc' 
+to hold long text (more than 255 characters). To forward engineer the change, run the 
+appropriate migration commands. Successfully run the migration files and check the records 
+to make sure the new field was added successfully.
+from __future__ import unicode_literals
+from django.db import models
+class Dojo(models.Model):
+    name = models.CharField(max_length=255)
+    desc = models.TextField()
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=2)
+class Ninja(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    dojo = models.ForeignKey(Dojo, related_name = "ninjas")

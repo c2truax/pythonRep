@@ -1,0 +1,62 @@
+1. Create the appropriate models and the appropriate relationship.  Design your models 
+so that the following command would be supported
+    1. Book.objects.first().uploader - this should return the user who uploaded the book
+    2. User.objects.first().uploaded_books - this should return all the books that are uploaded by the first user
+    3. Book.objects.first().liked_users - this should return all the users who liked the first book
+    4. User.objects.first().liked_books - this should return all the books that were liked by the first user
+class User(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f'{self.first_name}'
+
+class Book(models.Model):
+    name = models.CharField(max_length=255)
+    desc = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    uploader = models.ForeignKey(User, related_name="uploaded_books")
+    liked_users = models.ManyToManyField(User, related_name="liked_books")
+    def __str__(self):
+        return f'{self.name}'
+2. Create 3 different user accounts
+User.objects.create(first_name="Harry", last_name="Potter", email="harry@potter.com")
+User.objects.create(first_name="Ron", last_name="Weasley", email="ron@weasley.com")
+User.objects.create(first_name="Hermione", last_name="Granger", email="hermione@granger.com")
+3. Have the first user create/upload 2 books.
+harry = User.objects.get(id=1)
+Book.objects.create(name="Spells", desc="What Hogwarts did not teach me.", uploader=harry)
+Book.objects.create(name="Defeating Voldemort", desc="How I faced and defeated the infamous Voldemort.", uploader=harry) 
+4. Have the second user create/upload 2 other books.
+ron = User.objects.get(id=2)
+Book.objects.create(name="Women: Everything I Know", desc="I don't know much about women, but I need the money.", uploader=ron)
+Book.objects.create(name="Harry Potter", desc="My best friend, I taught him everything I know.", uploader=ron)
+5. Have the third user create/upload 2 other books.
+hermione = User.objects.get(id=3)
+Book.objects.create(name="Ron: Will he ever make his move?", desc="It is a love/hate relationship.", uploader=hermione)
+Book.objects.create(name="Three versus the world", desc="How Harry, Ron, and I saved the world.", uploader=hermione)
+6. Have the first user like the last book and the first book
+booklast = Book.objects.last()
+harry.liked_books.add(booklast)
+book1 = Book.objects.first()
+harry.liked_books.add(book1)
+7. Have the second user like the first book and the third book
+ron.liked_books.add(book1)
+book3 = Book.objects.get(id=3)
+ron.liked_books.add(book3)
+8. Have the third user like all books
+book2 = Book.objects.get(id=2)
+book4 = Book.objects.get(id=4)
+book5 = Book.objects.get(id=5)
+hermione.liked_books.add(book1,book2,book3,book4,book5,booklast)
+9. Display all users who like the first book
+Book.objects.first().liked_users.all()
+10. Display the user who uploaded the first book
+Book.objects.first().uploader
+11. Display all users who like the second book
+Book.objects.get(id=2).liked_users.all()
+12. Display the user who uploaded the second book
+Book.objects.get(id=2).uploader
