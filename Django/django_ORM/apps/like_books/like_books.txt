@@ -52,6 +52,8 @@ book2 = Book.objects.get(id=2)
 book4 = Book.objects.get(id=4)
 book5 = Book.objects.get(id=5)
 hermione.liked_books.add(book1,book2,book3,book4,book5,booklast)
+BETTER WAY...
+hermione.liked_books = Book.objects.all()
 9. Display all users who like the first book
 Book.objects.first().liked_users.all()
 10. Display the user who uploaded the first book

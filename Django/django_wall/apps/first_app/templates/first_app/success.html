@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Succes Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class='text-success'>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    <div class='row bg-primary'>
+        <h1 class='d-inline-block col-lg-10 ml-5 text-white'>Welcome, you've been logged in, {{ user.first_name }}</h1>
+        <a class='d-inline-block text-white' href="/logout">Logout</a>
+    </div>
+    <div class='col-lg-8'>
+        <form action='/success/send/' method='POST'>
+          {% csrf_token %}
+            <h2> Post a Message</h2>
+            <div class='row m-2'>
+                <textarea class="form-control d-inline-block mr-2 col-lg-7" name="message" rows="3"></textarea>
+                <input class="btn btn-primary m-1" name='send' type='submit' value="Post a message">
+            </div>
+        </form>
+    </div>
+    <div class='col-lg-8'>
+        {% for post in posts %}
+            <h5>{{post.user.first_name}} {{post.user.last_name}} said ({{post.created_at}}):</h5>
+            <div class='d-inline-block col-lg-9'>
+                <p class='d-inline-block'>"{{post.message}}"</p>
+            </div>
+            <div class='col-lg-8 ml-5'>
+                {% for comment in comments %}
+                <h5>{{comment.user.first_name}} {{comment.user.last_name}} said ({{comment.created_at}}):</h5>
+                <div class='d-inline-block col-lg-9'>
+                    <p class='d-inline-block'>"{{comment.comment}}"</p>
+                </div>
+                {% endfor %}
+                <div class='col-lg-8'>
+                        <form action='/success/comment/' method='POST'>
+                          {% csrf_token %}
+                            <h2> Post a Comment</h2>
+                            <div class='row m-2'>
+                                <textarea class="form-control d-inline-block mr-2 col-lg-7" name="comment" rows="3"></textarea>
+                                <input class="btn btn-success m-1" name='send' type='submit' value="Post a comment">
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

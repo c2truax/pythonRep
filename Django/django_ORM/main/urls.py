@@ -17,10 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('apps.first_app.urls')),
-    url(r'^', include('apps.user_login.urls')),
-    url(r'^', include('apps.dojo_ninjas.urls')),
-    url(r'^', include('apps.book_authors.urls')),
-    url(r'^', include('apps.like_books.urls')),
+    url(r'^first_app/', include('apps.first_app.urls')),
+    url(r'^user_login/', include('apps.user_login.urls')),
+    url(r'^dojo_ninjas/', include('apps.dojo_ninjas.urls')),
+    url(r'^book_authors/', include('apps.book_authors.urls')),
+    url(r'^like_books/', include('apps.like_books.urls')),
+    url(r'^semi_restful/', include('apps.semi_restful.urls')),
+    url(r'^courses/', include('apps.courses.urls')),
     url(r'^admin/', admin.site.urls),
 ]

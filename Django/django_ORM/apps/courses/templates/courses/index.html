@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Courses</title>
+    
+</head>
+<body>
+        <div class="container-fluid nav justify-content-center">
+                <form action='/courses/create/' method='post'>
+                    <h3>Add a new course</h3>
+                    {%csrf_token%}
+                    <div class="form-group nav">
+                        <label for="course">Course Name:</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="nav justify-content-center mt-2">
+                        <input type='submit' class="btn btn-dark nav-item" value='Add'>
+                    </div>
+                </form>
+            </div>
+    <div class="container">
+        <h1>Courses</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <th scope="row">{{course.name}}</th>
+                    <td>{{course.description}}</td>
+                    <td>{{course.created_at}}</td>
+                    <td>
+                        <a href="/courses/confirmation/{{course.id}}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

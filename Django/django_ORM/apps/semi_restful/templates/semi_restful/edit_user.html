@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>User Edit</title>
+    
+</head>
+<body>
+    <div class="container-fluid nav justify-content-center">
+        <form action='../../update/' method='post'>
+            <h3>Edit User {{session.id}}</h3>
+            {%csrf_token%}
+            <div class="form-group nav">
+                <label for="fname">First Name:</label>
+                <input type="text" class="form-control" name="first_name">
+            </div>
+            <div class="form-group nav">
+                <label for="lname">Last Name:</label>
+                <input type="text" class="form-control" name="last_name">
+            </div>
+            <div class="form-group nav">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email">
+            </div>
+            <div class="nav justify-content-center mt-2">
+                <input type='submit' class="btn btn-dark nav-item" value='Submit'>
+            </div>
+            <a href="../../">Go Back</a>
+        </form>
+    </div>
+</body>
+</html>
