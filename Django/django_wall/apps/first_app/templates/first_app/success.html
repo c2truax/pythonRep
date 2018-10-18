@@ -15,45 +15,51 @@
                 <p class='text-success'>{{message}}</p>
             {% endfor %}
         {% endif %}
-    <div class='row bg-primary'>
-        <h1 class='d-inline-block col-lg-10 ml-5 text-white'>Welcome, you've been logged in, {{ user.first_name }}</h1>
-        <a class='d-inline-block text-white' href="/logout">Logout</a>
+    <div class='container border border-dark bg-primary text-white'>
+        <h1 class='col-lg-5 d-inline-block'>CodingDojo Wall</h1>
+        <h2 class='col-lg-5 d-inline-block'>Welcome {{ user.first_name }}</h2>
+        <a class='col-lg-1 d-inline-block text-white' href="/logout">Logout</a>
     </div>
-    <div class='col-lg-8'>
-        <form action='/success/send/' method='POST'>
-          {% csrf_token %}
-            <h2> Post a Message</h2>
-            <div class='row m-2'>
-                <textarea class="form-control d-inline-block mr-2 col-lg-7" name="message" rows="3"></textarea>
-                <input class="btn btn-primary m-1" name='send' type='submit' value="Post a message">
-            </div>
-        </form>
-    </div>
-    <div class='col-lg-8'>
-        {% for post in posts %}
-            <h5>{{post.user.first_name}} {{post.user.last_name}} said ({{post.created_at}}):</h5>
-            <div class='d-inline-block col-lg-9'>
-                <p class='d-inline-block'>"{{post.message}}"</p>
-            </div>
-            <div class='col-lg-8 ml-5'>
-                {% for comment in comments %}
-                <h5>{{comment.user.first_name}} {{comment.user.last_name}} said ({{comment.created_at}}):</h5>
-                <div class='d-inline-block col-lg-9'>
-                    <p class='d-inline-block'>"{{comment.comment}}"</p>
+    <div class='container col-lg-20'>
+        <div class='col-lg-19'>
+            <form action='/success/send/' method='POST'>
+            {% csrf_token %}
+                <h3> Post a Message</h3>
+                <div class='row m-2'>
+                    <textarea class="form-control d-inline-block mr-2 col-lg-12" name="message" rows="3"></textarea>
+                    <input class="btn btn-primary m-1" name='send' type='submit' value="Post a message">
                 </div>
-                {% endfor %}
-                <div class='col-lg-8'>
-                        <form action='/success/comment/' method='POST'>
-                          {% csrf_token %}
-                            <h2> Post a Comment</h2>
+            </form>
+        </div>
+        <div class='col-lg-11'>
+            {% for post in posts %}
+                <h5>{{post.user.first_name}} {{post.user.last_name}} said ({{post.created_at}}):</h5>
+                <div class='d-inline-block col-lg-12'>
+                    <p class='d-inline-block'>"{{post.message}}"</p>
+                </div>
+                <div class='col-lg-12 ml-5'>
+                    {% for comment in comments %}
+                        {% if comment.parentMessage.id == post.id %}
+                            <h5>{{comment.user.first_name}} {{comment.user.last_name}} said ({{comment.created_at}}):</h5>
+                            <div class='d-inline-block col-lg-12'>
+                                <p class='d-inline-block'>"{{comment.comment}}"</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class='col-lg-15'>
+                        <form action='/success/addcomment/' method='POST'>
+                            {% csrf_token %}
+                            <h4> Post a Comment</h4>
                             <div class='row m-2'>
-                                <textarea class="form-control d-inline-block mr-2 col-lg-7" name="comment" rows="3"></textarea>
+                                <textarea class="form-control d-inline-block mr-2 col-lg-12" name="comment" rows="2"></textarea>
+                                <input type="hidden" name="message_id" value="{{post.id}}">
                                 <input class="btn btn-success m-1" name='send' type='submit' value="Post a comment">
                             </div>
                         </form>
                     </div>
-            </div>
-        {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

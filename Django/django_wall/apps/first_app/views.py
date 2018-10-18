@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from .models import User, Message, Comment
 import bcrypt
@@ -39,7 +39,8 @@ def success(request):
         return redirect('/')
     context= {
     'user': User.objects.get(id=request.session['user_id']),
-    'posts': Message.objects.all()
+    'posts': Message.objects.all().order_by('-created_at'),
+    'comments': Comment.objects.all()
     }
     return render(request, 'first_app/success.html', context)
 
@@ -47,8 +48,9 @@ def send(request):
     Message.objects.create(message=request.POST['message'], user=User.objects.get(id=request.session['user_id']))
     return redirect('/success/')
 
-def comment(request):
-    Comment.objects.create(comment=request.Post['comment'], user=User.objects.get(id=request.session['user_id'], message=Message.objects.get(id=request.POST['message_id'])))
+def addcomment(request):
+    Comment.objects.create(comment=request.POST['comment'], user=User.objects.get(id=request.session['user_id']), parentMessage = Message.objects.get(id=request.POST['message_id']))
+    return redirect('/success/')
 
 
 def logout(request):

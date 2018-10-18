@@ -8,5 +8,5 @@ urlpatterns = [
         url(r'^read/$', views.read),
         url(r'^success/send/$', views.send),
         url(r'^logout/$', views.logout),
-        url(r'^success/comment/$', views.comment),
+        url(r'^success/addcomment/$', views.addcomment),
 ]
