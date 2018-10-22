@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+    
+        {% if messages %}
+            {% for message in messages %}
+                <p class='text-success'>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    <div class="container">
+        <div class="row bg-primary text-white">
+            <h1 class="col-lg-8">Welcome, {{ user.alias }}!</h1>
+            <a class="col-lg-3 text-white" href="add/">Add Book and Review</a>
+            <a class="col-lg-1 text-white" href="/logout/">Logout</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h5>Recent Book Reviews:</h5>
+                {% for review in reviews %}
+                <div class='container'>
+                    <h5>{{review.book.title}}</h5>
+                    {% load static %}
+                    <p>Rating: <img src="/static/first_app/img/{{review.rating}}-star-rating.png"> </p>
+                    <p><a href="/users/{{review.user.id}}/">{{review.user.alias}}</a> says: "{{review.review}}"</p>
+                    <p>Posted on: {{review.created_at}}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-6">
+                <h5>Other Books with Reviews:</h5>
+                <div class="border w-75">
+                    {% for book in books %}
+                    <div class='container'>
+                        <a href="/books/{{book.id}}">{{book.title}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+<style>
+    img {
+        width:100px;
+    }
+</style>
+</html>

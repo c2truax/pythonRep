@@ -1,0 +1,44 @@
+1.What is the flow of information in a typical request, from when we type an address on our browser, to when we receive the response on our browser?
+the URL we type gets sent to a DNS server to be converted from words into an IP address, it then goes to that IP address which is an address for the server that has the information we are looking for, the server gets our request gathers the information we are looking for returns it to our computer's browser which then interprets it and renders the webpage that we wanted to view.
+2.What is MVC, OOP and procedural programming? Why would we use each?
+MVC = Models,Views,Controllers 
+3.What is jQuery and why do we use it?
+jQuery is a JavaScrypt library that we use because it is prebuilt items to help us use JavaScrypt without having to rebuild "the wheel" from scratch
+4.Consider a database with the following tables: users, friendships, where users includes id, name, and email, and friendships includes id, user_id, friend_id; If our friendships table includes a single association to confirm a friendship between two users, what is the QUERY to pull all of your non-friends?
+SELECT * FROM users JOIN friendships ON user.id = friends.user_id JOIN users as u2 ON u2.id = friends.friend_id WHERE user.name != "Chris Truax" AND u2.name != "Chris Truax";
+5.What are some ways to make your website uniform across multiple browsers? 
+6.What are the differences between submitting a form via method="post" vs method="get"?
+POST - to store information out of sight, used for passing information from a from
+GET - used when you don't care if people see the information like user ID. This information is visible in the URL and is a good way to provide the user with a path they can copy and share allowing the friend to paste the link and go directly there like a google search query.
+7.What are the advantages/disadvantages of sending data to the server in the url vs making a post request?
+8.Why should we never render a page on a post request.
+Because if the person refreshes their page they will resend the request. If it is a payment request they will be charged again.
+9.You notice that when you click submit on a form, your app breaks. Describe how you would approach debugging this problem. I would see if the browser gives me any error messages, check the server also for any error messages. If I still can't figure out where the issue is I might do some print statements to find out where in the code it is breaking.
+10.What are a couple security threats and how do we defend against them?
+11.What is the difference between Session, Post, and Cookies?
+12.Explain why and when we use session.
+13.What is an ORM and why do we use it?  What are its advantages and also its disadvantages.
+14.In your models, you may make a class User with the following code: class User(models.Model): Why do we have models.Model inside the parentheses?
+15.In your models, you may make a class UserManager with the following code: class UserManager(models.Manager): Why do we have models.Manager inside the parentheses?
+16.What is self and why does it appear in methods that we define in a class?
+17.What is the __init__ method in a class?
+18.Name 2 HTTP Verbs and when would we use each
+POST - to store information out of sight, used for passing information from a from
+GET - used when you don't care if people see the information like user ID. This information is visible in the URL and is a good way to provide the user with a path they can copy and share allowing the friend to paste the link and go directly there like a google search query.
+19.What is RegEx and what do we use it for?
+20.On large web applications, what are the benefits of using a framework?
+21.What does a templating engine do for us?
+22.What are 3 different type of database table relationships?1 to many, many to many, 1 to 1
+23.Why do we use routes and how do they work?
+24.What is a virtual environment and why do we use it?
+25.Explain what this code does: “from flask import Flask”.
+26.What is the importance of normalizing your database?
+27.What is an API?
+28.What is AJAX and why do we use it?
+29.What is the difference between an HTTP request/response and an AJAX request/response?
+30.What is the difference between client and server validation, and when do we use either or both?
+31.What are the major differences between Flask and Django?
+32.(VB) What are differences between tuples, lists, and dictionaries.
+Tuples are lists that are immutible
+lists are a grouping of objects that are indexed visually displayed with list = (4,7,1) to access the number 7 we would write list[1]
+dictionaries are a grouping of objects that are key/value paired meaning for each value stored in the dictionary you access it by a key like 'name' visually displayed with {'key':"value"}

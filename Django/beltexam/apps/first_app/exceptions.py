@@ -1,0 +1,2 @@
+class BreakoutException(Exception):
+    pass
