@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View Job</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container m-5">
+        <div class="row mb-5 bg-primary text-white p-2">
+            <h3 class="col-lg-7">Hello {{ user.first_name }}! These are the job details!</h3>
+            <a class="col-lg-2 text-white" href="/dashboard/">Dashboard</a>
+            <a class="col-lg-2 text-white" href="/logout/">Logout</a>
+        </div>
+        <div class='row'>
+                <h5>{{job.title}}</h5>
+        </div>
+        <div class="row ml-5">
+            <div class="col-lg-6 border border-primary bg-dark text-white rounded p-3">
+                <p>{{job.creator.first_name}} says "{{job.desc}}"</p>
+                <p>Location: {{job.location}}</p>
+                <p>Assigned to: </p>
+                {% for doer in doers %}
+                <p class="ml-5">{{doer.first_name}}</p>
+                {% endfor %}
+                <p>Posted on: {{job.created_at}}</p>
+                <p>Category: {{job.category.cat_type}}</p>
+            </div>
+        </div>
+        {% if job.creator.id == request.session.user_id %}
+            <div></div>
+        {% elif display.doer == 1 %}
+            <a href="/removejob/{{job.id}}/">Give Up</a>
+            <a class="{{display.view}}" href="/addjob/{{job.id}}/">Add</a>
+        {% else %}
+            <a class="{{display.view}}" href="/removejob/{{job.id}}/">Give Up</a>
+            <a href="/addjob/{{job.id}}/">Add</a>
+        {% endif %}
+    </div>
+</body>
+</html>

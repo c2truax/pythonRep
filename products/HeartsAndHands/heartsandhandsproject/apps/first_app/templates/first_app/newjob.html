@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Job</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container m-5">
+        <div class="row bg-primary text-white p-2 mb-5">
+            <h3 class="col-lg-7">Hello {{ user.first_name }}! Create a job!</h3>
+            <a class="col-lg-2 text-white" href="/dashboard/">Dashboard</a>
+            <a class="col-lg-2 text-white" href="/logout/">Logout</a>
+        </div>
+        <form action='/createjob/' class='col-lg-10' method='POST'>
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-6">
+                    
+                        {% if messages %}
+                            {% for message in messages %}
+                            
+                            <p class='text-danger'>{{message}}</p>
+                            {% endfor%}
+                            
+                        {% endif %}
+                
+                    <label class="d-inline-block col-lg-3" for='title'>Title:</label>
+                    <input type="text" class="form-control d-inline-block col-lg-8" name='title' placeholder="Title">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                
+                
+                    <label class="d-inline-block col-lg-3" for='desc'>Description</label>
+                    <input type="text" class="form-control d-inline-block col-lg-8" name='desc' placeholder="Description">
+                </div>
+            </div>
+            <div class='row'>
+                <div class="form-group col-lg-6">
+                
+                
+                    <label class="d-inline-block col-lg-3" for="location">Location</label>
+                    <input type="text" class="form-control d-inline-block col-lg-8" name='location' placeholder="Location">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    
+                    <label class="d-inline-block col-lg-2 align-top" for="category" >Category</label>
+                    <div class="container d-inline-block col-lg-8">
+                        <div class="form-check">
+                            <input class="form-check-input d-inline-block col-lg-8" type="radio" name="category" value="pet care" checked>
+                            <label class="form-check-label" for="pet_care">
+                                pet care (selected)
+                            </label>
+                        </div>
+                        {% for category in categories %}
+                        <div class="form-check">
+                            <input class="form-check-input d-inline-block col-lg-8" type="radio" name="category" value="{{category.cat_type}}">
+                            <label class="form-check-label" for="{{category.cat_type}}">
+                                {{category.cat_type}}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="for-group row ml-5">
+                <div class="form-group col-lg-6">
+                    <label class="d-inline-block col-lg-2" for="othercat" >Other:</label>
+                    <input type="text" class="form-control d-inline-block col-lg-8" name='othercat'>
+                </div>
+            </div>
+            <a href="/dashboard/" class="btn btn-dark">Cancel</a>
+            <button type="submit" value="submit" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
