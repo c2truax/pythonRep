@@ -237,6 +237,9 @@ def about(request):
 def get_involved(request):
 	return render(request, 'first_app/get_involved.html')
 
+def products(request):
+	return render(request, 'first_app/products.html')
+
 def contact(request,id):
 	context = {
 		'id': id
@@ -245,19 +248,19 @@ def contact(request,id):
 
 def email(request):
 	print(request.POST)
-	fromaddr = "{{insert email}}"
+	fromaddr = "<<insert email>>"
 	toaddr = request.POST['email']
 	msg = MIMEMultipart()
 	msg['From'] = fromaddr
 	msg['To'] = toaddr
 	msg['Subject'] = request.POST['subject']
 	
-	body = "Thank you for your email! We will look over your email and get back to you. This is an automated response please do not reply to this email.--------------------------------------------"+request.POST['body']
+	body = "Thank you for your email! We will look over your email and get back to you. This is an automated response please do not reply to this email.-- Your Email: "+request.POST['body']
 	msg.attach(MIMEText(body, 'plain'))
 	
 	server = smtplib.SMTP('smtp.gmail.com', 587)
 	server.starttls()
-	server.login(fromaddr, "{{insert pw}}")
+	server.login(fromaddr, "<<insert pw>>")
 	text = msg.as_string()
 	server.sendmail(fromaddr, toaddr, text)
 	server.quit()

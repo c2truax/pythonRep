@@ -1,0 +1,18 @@
+@media only screen and (max-width: 991px){
+    /* we will set these stylings only if the device is a screen with a width of 991px or less */
+    #carouselExampleIndicators2 {
+        display: block;
+    }
+    #carouselExampleIndicators {
+        display: none;
+    }
+}
+@media only screen and (min-width: 992px){
+    /* we will set these stylings only if the device is a screen with a width of 992px or more */
+    #carouselExampleIndicators2 {
+        display: none;
+    }
+    #carouselExampleIndicators {
+        display: block;
+    }
+}

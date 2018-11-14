@@ -18,6 +18,7 @@ urlpatterns = [
 		url(r'^about/$', views.about),
 		url(r'^email/$', views.email),
 		url(r'^get_involved/$', views.get_involved),
+		url(r'^products/$', views.products),
 		url(r'^logout/$', views.logout),
 		url(r'^read/$', views.read)
 ]
