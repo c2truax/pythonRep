@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password Reset
+From: test@email.com
+To: jreese@codingdojo.com
+Date: Mon, 28 Jan 2019 21:20:23 -0000
+Message-ID: <154871042326.33917.2907794069634009405@legolas>
+
+Click the following link to reset your password: localhost:8000/c3/submitreset/1
+-------------------------------------------------------------------------------

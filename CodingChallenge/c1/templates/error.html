@@ -1,0 +1,7 @@
+{% if messages %}
+  {% for message in messages %}
+    {% if tag in message.tags %}
+    <span class= "error_msg" > {{ message }}</span>
+    {% endif %}
+  {% endfor %}
+{% endif %}

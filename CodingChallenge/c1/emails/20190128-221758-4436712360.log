@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password Reset
+From: test@email.com
+To: a@a.com
+Date: Mon, 28 Jan 2019 22:17:58 -0000
+Message-ID: <154871387880.36072.15868252169958444333@legolas>
+
+Click the following link to reset your password: localhost:8000/c3/submitreset/a@a.com
+-------------------------------------------------------------------------------

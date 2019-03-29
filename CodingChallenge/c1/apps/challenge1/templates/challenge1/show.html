@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    {% load static %}
+    <link rel="stylesheet" href={% static "challenge1/css/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/dashboard.css" %}>
+    <link rel="stylesheet" href={% static "css/all.css" %}>
+
+  </head>
+
+  <body>
+    {% include 'header.html' %}
+
+    <div class="dash">
+      <div class="dash">
+        <h4>User info:</h4>
+        <ul>
+          <li>Name: {{request.session.name}}</li>
+          <li>Email: {{request.session.email}}</li>
+          <li>Your ID is: {{request.session.user_id}}</li>
+          <li>Password: {{request.session.password}} <em><strong>(Is this hashed??)</em></strong></li>
+        </ul>
+      <h3>
+        We <strong class="blink_me">DEFINITELY</strong> shouldn't see this page unless we're logged in!
+      <h3>
+
+    </div>
+  </body>
+</html>

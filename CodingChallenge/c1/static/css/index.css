@@ -1,0 +1,22 @@
+.container>h2{
+  /* width : 980px; */
+  padding : 5%;
+  text-align: center;
+  border: 1px solid black;
+  background: black;
+  color : white
+
+}
+
+h4{
+  padding: 2%;
+  background: black;
+  color: white;
+}
+ul{
+  list-style: None;
+}
+
+.btn{
+  background: orange;
+}

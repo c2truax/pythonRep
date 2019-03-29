@@ -1,0 +1,21 @@
+body {
+  background-color: cadetblue;
+}
+
+.left-block,.right-block{
+  display: inline-block;
+  vertical-align: top;
+  width: 45%;
+  margin-top: 40px;
+
+}
+
+.right-block{
+    margin-left: 5%;
+}
+
+.error_msg{
+  color : red;
+  font-size: 0.75em;
+  font-weight: 100;
+}
